@@ -139,8 +139,8 @@ Não fornecemos binários, fontes nem qualquer material copyright da TOTVS, apen
 
 # Autor
 
-**Emanuel Bezerra - EMATECH**
-
+**Emanuel Bezerra**
 [Linkedin](www.linkedin.com/in/emanuel-fbezerra)
 
+**[EMATECH](www.ematech.com.br)**
 → Compartilhe, sugira melhorias, envie Pull Request ou entre em contato pelo LinkedIn!
