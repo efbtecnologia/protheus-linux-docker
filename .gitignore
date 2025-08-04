@@ -1,0 +1,21 @@
+# Arquivos e pastas de log
+# As regras abaixo garantem que as subpastas (appserver, dbaccess, etc.)
+# sejam rastreadas, mas o seu conteúdo seja ignorado.
+logs/appserver/*
+logs/ctreeserver/*
+logs/dbaccess/*
+logs/license/*
+!logs/.gitkeep
+
+# Pastas com dados de instalação (TOTVS, Postgres, etc.)
+# Ignora todas as pastas cujo nome contenha "_data" ou "_data_".
+*_data/
+*_data_*/
+
+# Pastas com os executáveis (SRC - Source)
+# Ignora todas as pastas cujo nome termine em "_src".
+*_src/
+
+# Arquivos e pastas geradas pelo sistema
+.DS_Store
+.vscode/
