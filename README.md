@@ -3,7 +3,9 @@ Ambiente de laboratório local, modular, para profissionais que buscam domínio 
 Cada fase é independente — utilize onde e como fizer sentido para sua realidade profissional.
 
 🚩 Visão Geral
+
 Este projeto foi desenhado para quem:
+
 Quer rodar Protheus/TOTVS no Fedora puro;
 
 Busca um ambiente Dockerizado flexível, para implantar, testar ou escalar rapidamente;
