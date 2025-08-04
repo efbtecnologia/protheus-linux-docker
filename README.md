@@ -30,7 +30,7 @@ Por que tentar? Aprendizado real do core, domínio da infra, base para todo o re
 
 Quando usar: Quando estudar Protheus/TOTVS no mundo Linux puro, montar laboratório, migrar de Windows, ou querer hackear o ambiente ao limite.
 
-📄 Doc: docs/fase1-install-fedora.md
+📄 Doc: docs/fase1-protheus-fedora.md
 
 
 Fase 2 — Protheus/TOTVS em Docker (Multi-Host)
