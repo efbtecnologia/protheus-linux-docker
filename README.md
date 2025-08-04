@@ -2,7 +2,7 @@
 Ambiente de laboratório local, modular, para profissionais que buscam domínio real sobre a infraestrutura do Protheus/TOTVS com Linux, Docker, Rocky Linux e DevOps.
 Cada fase é independente — utilize onde e como fizer sentido para sua realidade profissional.
 
-🚩 Visão Geral
+🚩 **Visão Geral**
 
 Este projeto foi desenhado para quem:
 
@@ -18,9 +18,9 @@ Cada fase é um microprojeto, com repositório próprio e documentação detalha
 
 Você pode usar apenas uma fase, todas, ou seguir na ordem que desejar.
 
-🧩 Fases do Projeto
+🧩 **Fases do Projeto**
 
-Fase 1 — Protheus no Fedora (Linux Host Local)
+**Fase 1 — Protheus no Fedora (Linux Host Local)**
 
 Para quem quer aprender onde tudo começa: Protheus/TOTVS rodando nativamente em Linux, sem camada intermediária, enfrentando as questões de dependência, biblioteca, binários e scripts.
 
@@ -30,7 +30,7 @@ Por que tentar? Aprendizado real do core, domínio da infra, base para todo o re
 
 Quando usar: Quando estudar Protheus/TOTVS no mundo Linux puro, montar laboratório, migrar de Windows, ou querer hackear o ambiente ao limite.
 
-📄 Doc: docs/fase1-protheus-fedora.md
+📄 Doc: [docs/fase1-protheus-fedora.md](https://github.com/efbtecnologia/protheus-linux-docker/blob/main/docs/fase1-protheus-fedora.md)
 
 
 Fase 2 — Protheus/TOTVS em Docker (Multi-Host)
@@ -47,7 +47,7 @@ Seu host pode ser Windows, Mac, Linux, etc.
 
 Ideal para times, POCs, rotinas Dev/Test/QA, laboratórios ou “playground” seguro.
 
-📄 Doc: docs/fase2-docker.md
+📄 Doc: [docs/fase2-docker.md](https://github.com/efbtecnologia/protheus-linux-docker/blob/main/docs/fase2-docker.md)
 
 Fase 3 — Rocky Linux (Simulação de Produção Corporativa)
 
@@ -71,7 +71,7 @@ Quer garantir 100% de compatibilidade;
 
 Precisa testar rotas de exposição externas reais (NGINX, NGROK, VPNs).
 
-📄 Doc: docs/fase3-rockylinux.md
+📄 Doc: [docs/fase3-rockylinux.md](https://github.com/efbtecnologia/protheus-linux-docker/blob/main/docs/fase3-rockylinux.md)
 
 Fase 4 — CI/CD (Integração Contínua & Deploy)
 
@@ -95,7 +95,7 @@ Quer transformar infraestrutura tradicional em infraestrutura como código;
 
 Busca certificações, vagas técnicas de mercado, ou entregar inovação no cliente.
 
-📄 Doc: docs/fase4-cicd.md
+📄 Doc: [docs/fase4-cicd.md](https://github.com/efbtecnologia/protheus-linux-docker/blob/main/docs/fase4-cicd.md)
 
 🗂️ Estrutura Sugerida
 
@@ -129,7 +129,7 @@ protheus-lab/
 
 Pastas *_SRC devem ser providenciadas individualmente, conforme licença TOTVS.
 
-📌 Observações Importantes
+📌 **Observações Importantes**
 
 Cada fase é independente e pode ser estudada ou utilizada separadamente.
 
@@ -137,10 +137,10 @@ A documentação de cada fase traz dicas, exemplos, scripts e explicações deta
 
 Não fornecemos binários, fontes nem qualquer material copyright da TOTVS, apenas estrutura e exemplos.
 
-✍️ Autor
+# Autor
 
-Emanuel Bezerra - EMATECH
+**Emanuel Bezerra - EMATECH**
 
-www.linkedin.com/in/emanuel-fbezerra
+[Linkedin](www.linkedin.com/in/emanuel-fbezerra)
 
 → Compartilhe, sugira melhorias, envie Pull Request ou entre em contato pelo LinkedIn!

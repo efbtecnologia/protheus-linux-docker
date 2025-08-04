@@ -20,7 +20,8 @@ Instalação de Dependências: O Protheus, AppServer, DBAccess, etc., precisam d
 
 Configuração de Limites do Kernel: O limite padrão de arquivos abertos no Linux é baixo para a carga de trabalho de um AppServer. Ajuste o limite para 102400 para garantir a estabilidade.
 
-# Passo 2: Instalação e Configuração do Banco de Dados PostgreSQL
+**Passo 2: Instalação e Configuração do Banco de Dados PostgreSQL**
+
 Nesta etapa, vamos instalar e configurar o PostgreSQL, o SGBD que será usado pelo Protheus. A TOTVS não fornece este software, apenas o homologa.
 
 Instalação do PostgreSQL: Instale o PostgreSQL, que será usado pelo Protheus.
@@ -63,7 +64,7 @@ Execução do Instalador: Para cada binário (AppServer, DBAccess, etc.), execut
 
 Estrutura de Pastas: Organize os binários e serviços em uma estrutura de diretórios lógica. A seguir, apresentamos a nossa estrutura de referência, que foi utilizada com sucesso neste projeto:
 
-/mnt/Acer_HD/docker/totvs/
+/mnt/docker/totvs/
 
 ├── appserver/
 
