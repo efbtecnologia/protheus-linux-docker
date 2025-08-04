@@ -13,8 +13,9 @@ logs/license/*
 *_data_*/
 
 # Pastas com os executáveis (SRC - Source)
-# Ignora todas as pastas cujo nome termine em "_src".
-*_src/
+# Ignora todo o conteúdo, mas não as pastas cujo nome termine em "_src"
+**/*_src/*
+!**/*_src/.gitkeep
 
 # Arquivos e pastas geradas pelo sistema
 .DS_Store

@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+  totvs_license:
+    image: totvsengpro/license-dev:latest
+    container_name: totvs_license
+    restart: unless-stopped
+    ports:
+      - "5555:5555" # Porta de licenciamento (conexão do ERP/AppServer)
+      - "2234:2234" # Porta de monitoramento/manutenção
+      - "54837:54837" # WebMonitor
+      - "8020:8020"   # WebApp (se o License Server tiver um)
+    environment:
+      - LICENSE_SERVER_PORT=5555
+      - MONITOR_SERVER_PORT=2234
+      - TZ=America/Sao_Paulo # Fuso horário do Brasil
+      - TOTVSID_USERNAME=efbtecnologia@gmail.com
+      - TOTVSID_PASSWORD=NVZd5f*n6BpWaGV
+    volumes:
+      - ./license:/totvs/license # Persiste dados de licença no host
+      - ./logs/license:/totvs/license/logs # Persiste logs no host
+
+  postgres_db:
+    image: postgres:16-alpine # Usando a versão 16 do PostgreSQL (ajuste se precisar de outra)
+    container_name: postgres_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: protheus_dev # Nome do banco de dados (do seu appserver.ini)
+      POSTGRES_USER: protheus   # Usuário do banco de dados
+      POSTGRES_PASSWORD: totvs   # Senha do usuário
+      TZ: America/Sao_Paulo      # Fuso horário
+    ports:
+      - "127.0.0.1:5433:5432" # Mapeia a porta do PostgreSQL para o host
+    volumes:
+      - ./postgres_data:/var/lib/pgsql/data:z         # Persiste os dados do banco de dados
+      - ./postgres_init_scripts:/docker-entrypoint-initdb.d # Executa scripts SQL na primeira inicialização
+    healthcheck: # Adicionado para garantir que o BD esteja pronto antes de outros serviços
+      test: ["CMD-SHELL", "pg_isready -U protheus -d protheus_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  ctreeserver_protheus:
+    build:
+      context: ./ctreeserver
+      dockerfile: Dockerfile
+    container_name: ctreeserver_protheus
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5500:5500" # Mapeia a porta padrão do Ctree Server
+    environment:
+      - TZ=America/Sao_Paulo # Fuso horário do Brasil
+    volumes:
+      - ./ctreeserver_data:/opt/totvs/ctreeserver/faircom/linux.x64.64bit/bin/ace/isam/data
+      - ./logs/ctreeserver:/opt/totvs/ctreeserver/faircom/linux.x64.64bit/bin/ace/isam/logs
+    # O comando que será executado ao iniciar o contêiner (inclui chmod e inicialização)
+    command: ["./startace"]
+    # Ajuste de dependência: Ctree Server depende do License Server
+    depends_on:
+      totvs_license:
+        condition: service_started
+
+  dbaccess_server:
+    build:
+      context: ./dbaccess
+      dockerfile: Dockerfile
+    container_name: dbaccess_server
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:7890:7890" # Mapeia a porta do DBAccess para o host
+    environment:
+      - TZ=America/Sao_Paulo # Fuso horário do Brasil
+      - LD_LIBRARY_PATH=/usr/lib64:${LD_LIBRARY_PATH}
+    volumes:
+      # Garante que os logs do DBAccess sejam persistidos localmente
+      - ./logs/dbaccess:/opt/totvs/dbaccess/log
+    # O comando que será executado ao iniciar o contêiner (inclui chmod, sed e inicialização)
+    command: [./app.sh]
+    # Ajuste de dependência: DBAccess depende do License Server e do PostgreSQL (saudável)
+    depends_on:
+      totvs_license:
+        condition: service_started
+      postgres_db:
+        condition: service_healthy
+      ctreeserver_protheus:
+        condition: service_started 
+
+  appserver_protheus:
+    build:
+      context: ./appserver
+      dockerfile: Dockerfile
+    container_name: appserver_protheus
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:1234:1234" # Porta do AppServer
+      - "127.0.0.1:4321:4321" # Porta do WEBAPP
+    environment:
+      - TZ=America/Sao_Paulo # Fuso horário do Brasil
+    volumes:
+      # Garante que os logs do AppServer sejam persistidos localmente
+      - ./logs/appserver:/opt/totvs/protheus/protheus/log
+    # O comando que será executado ao iniciar o contêiner
+    command: ["/opt/totvs/protheus/protheus/bin/appserver/app.sh"]
+    # Ajuste de dependência: AppServer depende do License, Ctree Server e DBAccess
+    depends_on:      
+      dbaccess_server:
+        condition: service_started
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
